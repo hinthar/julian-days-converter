@@ -1,0 +1,28 @@
+{
+  "name": "@hinthar/julian-days-converter",
+  "version": "1.0.0",
+  "description": "Converting Julian and Gregorian dates to each other",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/index.d.ts",
+  "jsdelivr": "./dist/browser/index.js",
+  "scripts": {
+    "esm": "uglifyjs ./src/esm/index.js --source-map --output ./dist/esm/index.mjs",
+    "cjs": "uglifyjs ./src/cjs/index.js --source-map --output ./dist/cjs/index.js",
+    "browser": "uglifyjs ./src/browser/index.js --source-map --output ./dist/browser/index.js"
+  },
+  "keywords": [
+    "julian",
+    "gregorian",
+    "converter"
+  ],
+  "author": "@hinthar",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hinthar/julian-days.git"
+  },
+  "devDependencies": {
+    "uglify-js": "^3.17.4"
+  }
+}
