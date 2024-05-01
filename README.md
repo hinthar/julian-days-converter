@@ -2,15 +2,43 @@
 
 **_This package assumes use of the Gregorian calendar and only works correctly for dates after 1858._**
 
-@ 2024 Hin Thar
-
-@license http://www.apache.org/licenses/LICENSE-2.0
-
-Checked with online converter of aavso, https://www.aavso.org/jd-calculator.
-
 ---
 
-## Install
+## Install from jsr.io
+
+[![JSR Scope](https://jsr.io/badges/@hinthar)](https://jsr.io/@hinthar) [![JSR](https://jsr.io/badges/@hinthar/julian-days-converter)](https://jsr.io/@hinthar/julian-days-converter) [![JSR Score](https://jsr.io/badges/@hinthar/julian-days-converter/score)](https://jsr.io/@hinthar/julian-days-converter)
+
+npm
+
+```bash
+npx jsr add @hinthar/julian-days-converter
+```
+yarn
+
+```bash
+yarn dlx jsr add @hinthar/julian-days-converter
+```
+pnpm
+
+```bash
+pnpm dlx jsr add @hinthar/julian-days-converter
+
+```
+deno
+
+```bash
+deno add @hinthar/julian-days-converter
+```
+bun
+
+```bash
+bunx jsr add @hinthar/julian-days-converter
+```
+
+
+
+
+## Install from npm registry
 
 ```bash
 npm i @hinthar/julian-days-converter
@@ -24,7 +52,9 @@ pnpm i @hinthar/julian-days-converter
 yarn add @hinthar/julian-days-converter
 ```
 
-**CDN**
+
+
+## From CDN
 
 ![jsd](https://www.jsdelivr.com/assets/8aab44d2735c604d59887d32cc74b517689e5d5c/img/jsdelivr-horizontal-regular.svg)
 
