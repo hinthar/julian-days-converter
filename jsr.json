@@ -1,0 +1,13 @@
+{
+  "name": "@hinthar/julian-days-converter",
+  "version": "1.0.0",
+  "exports": "./src/deno/mod.ts",
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "jsr.json",
+      "src/deno/**/*"
+    ]
+  }
+}
