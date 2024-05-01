@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html
+  lang="en-US"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:b="http://www.google.com/2005/gml/b"
+  xmlns:data="http://www.google.com/2005/gml/data"
+  xmlns:expr="http://www.google.com/2005/gml/expr"
+  xmlns:og="http://ogp.me/ns#"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Julian Days Converter</title>
+    <script src="https://cdn.jsdelivr.net/npm/@hinthar/julian-days-converter@1.0.0/dist/browser/index.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      async="async"
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cutive&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="mona_flying.png" type="image/x-icon" />
+    <style>
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        background-color: antiquewhite;
+      }
+      main {
+        font-family: "Cutive", serif;
+        padding: 25px;
+        margin: auto;
+        width: 50%;
+      }
+      .math-body {
+        padding: 16px;
+        margin: auto;
+        width: 80%;
+      }
+      .input-1 {
+        width: 70px;
+        padding: 5px;
+        border: none;
+        margin-right: 20px;
+        background-color: antiquewhite;
+        font-size: medium;
+        border-bottom: 0.5px solid;
+      }
+      .input-2 {
+        width: 70px;
+        padding: 10px;
+        border: none;
+        margin-right: 20px;
+        background-color: antiquewhite;
+        font-size: medium;
+        border-bottom: 0.5px solid;
+      }
+      .input-3 {
+        width: 100px;
+        padding: 5px;
+        border: none;
+        margin-right: 20px;
+        background-color: antiquewhite;
+        font-size: medium;
+        border-bottom: 0.5px solid;
+      }
+      .convert-body {
+        padding: 27px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h3>Julian Days Converter</h3>
+      <hr />
+      <h4>1. Gregorian to JDN</h4>
+      <br />
+      <div id="converter-1"></div>
+      <hr />
+      <p>
+        It is one of the conversion methods from the Gregorian calendar to JDN.
+      </p>
+      <ul>
+        <li>J = JDN</li>
+        <br />
+        <li>j = year</li>
+        <br />
+        <li>m = month[1 = Jan, ..., 12 = Dec]</li>
+        <br />
+        <li>d = day[1-31]</li>
+      </ul>
+      <div class="math-body">
+        \begin{align} &amp; c_0 = \lfloor\frac{m - 3}{12}\rfloor \hspace{100cm}
+        \\ \\ &amp; x_4 = j + c_0 \\ \\ &amp; \{x_3, x_2\} = div(x_4, 100) \\ \\
+        &amp; x_1 = m − 12c_0 − 3 \\ \\ &amp; a =
+        \lfloor\frac{146097x_3}{4}\rfloor + \lfloor\frac{36525x_2}{100}\rfloor
+        \\ \\ &amp; b = \lfloor\frac{153x_1 + 2}{5}\rfloor + d + 1721119 \\ \\
+        &amp; \textcolor{green}{J = a + b } \end{align}
+      </div>
+      <p>Below is an example for January 1, 2024.</p>
+
+      <div class="math-body">
+        \begin{align} &amp;\text{ Find J if j = 2024 , m = 1 and d = 1} \\ \\
+        &amp; c_0 = \lfloor\frac{1 - 3}{12}\rfloor = -1 \hspace{100cm} \\ \\
+        &amp; x_4 = 2024 + (-1) = 2023 \\ \\ &amp; \{x_3, x_2\} = div(2023, 100)
+        = \{20,23\} \\ \\ &amp; x_1 = 1 − 12×(-1) − 3 = 10 \\ &amp; a =
+        \lfloor\frac{146097×20}{4}\rfloor + \lfloor\frac{36525×23}{100}\rfloor =
+        738885 \\ \\ &amp; b = \lfloor\frac{153×10 + 2}{5}\rfloor + 1 + 1721119
+        = 1721426 \\ \\ &amp; J = 738885 + 1721426 = 2460311 \end{align}
+      </div>
+
+      <hr />
+      <script>
+        const monthArray = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        var dt = new Date();
+        var year = dt.getFullYear();
+        var mo = dt.getMonth();
+        var day = dt.getDate();
+        let v = [];
+        for (let i = mo; i <= 12; i++) {
+          v.push(i);
+        }
+        let s = [];
+        if (mo !== 1) {
+          for (let i = mo - 1; i >= 1; i--) {
+            s.push(i);
+          }
+        }
+        const value = [...v, ...s];
+        var frame = document.querySelector("#converter-1");
+        var fo = document.createElement("form");
+        fo.classList.add("convert-body");
+        fo.innerHTML = `
+        <p> Online  Gregorian  to  Julian  Day  Number  Converter</p>
+        <br>
+        <label for="year"><small>Year : </small></label>
+        <input type="number" name="year" id="year" class="input-1" value=${year} min=1900 max=2500>
+        <label for="month"><small>Month : </small></label>
+        <select name="month" id="month" class="input-2">
+            ${value
+              .map((i) => {
+                return `
+              <option value="${i}">${monthArray[i]}</option>
+              `;
+              })
+              .join("")}
+        </select>
+        <label for="day"><small>Day : </small></label>
+        <input type="number" name="day" id="day" class="input-1" value=${day} min=1 max=31>
+        `;
+        frame.appendChild(fo);
+        var convert = () => {
+          var yrEl = fo.elements.namedItem("year"),
+            moEl = fo.elements.namedItem("month"),
+            dEl = fo.elements.namedItem("day");
+          var y = parseInt(yrEl.value),
+            m = parseInt(moEl.value),
+            d = parseInt(dEl.value),
+            jd = toJD(y, m, d);
+          return jd;
+        };
+
+        var rp = document.createElement("small");
+        rp.innerText = `JD : ${convert()}`;
+        fo.appendChild(rp);
+        fo.addEventListener("change", (e) => {
+          e.preventDefault();
+          rp.innerText = `JD : ${convert()}`;
+        });
+      </script>
+      <h4>2. Julian to Gregorian</h4>
+      <br />
+      <div id="converter-2"></div>
+      <hr />
+      <p>A Gregorian calendar conversion calculator from JDN is described.</p>
+      <ul>
+        <li>J = JDN</li>
+        <br />
+        <li>j = year</li>
+        <br />
+        <li>m = month[1 = Jan, ..., 12 = Dec]</li>
+        <br />
+        <li>d = day[1-31]</li>
+      </ul>
+      <div class="math-body">
+        \begin{align} & \{x_3, r_3\} = div(4×J − 6884477, 146097) \\ & \{x_2,
+        r_2\} = div(100\lfloor\frac{r_3}{4}\rfloor + 99,36525) \hspace{100cm} \\
+        & \{x_1, r_1\} = div(5\lfloor\frac{r_2}{100}\rfloor + 2, 153) \\ &
+        \textcolor{green}{d = \lfloor\frac{r_1}{5}\rfloor + 1 }\\ & c_0 =
+        \lfloor\frac{x_1 + 2}{12}\rfloor \\ & \textcolor{green}{j = 100x_3 + x_2
+        + c_0} \\ &\textcolor{green}{ m = x_1 - 12c_0 + 3 } \end{align}
+      </div>
+      <p>Below is an example for January 1, 2024.</p>
+
+      <div class="math-body">
+        \begin{align} & \text{ Find j , m and d if J = 2460311} \hspace{100cm}
+        \\ \\ & a = 4× 2460311 - 6884477 = 2956767 \\ & x_3 =
+        \lfloor\frac{a}{146097}\rfloor = 20 \\ & r_3 = a \bmod 146097 = 34827 \\
+        & b = 100 \lfloor\frac{r_3}{4}\rfloor + 99 \\ & = 100 × 8706 + 99 =
+        870699 \\ & x_2 =\lfloor\frac{b}{36525}\rfloor = 23 \\ & r_2 = b \bmod
+        36525 = 30624 \\ & c = 5\lfloor\frac{r_2}{100}\rfloor + 2 \\ & = 5 × 306
+        + 2 = 1532 \\ & x_1 = \lfloor\frac{c}{153}\rfloor = 10 \\ & r_1 = c
+        \bmod 153 = 2 \\ & c_0 = \lfloor\frac{x_1 + 2}{12}\rfloor = 1 \\ &
+        \textcolor{green} {j = 100 × 20 + 23 + 1 = 2024} \\ &\textcolor{green}{m
+        = 10 - 12 × 1 + 3 = 1} \\ &\textcolor{green}{d
+        =\lfloor\frac{2}{5}\rfloor + 1 = 1 } \end{align}
+      </div>
+      <hr />
+      <script>
+        var fra = document.querySelector("#converter-2");
+        var foo = document.createElement("form");
+        foo.classList.add("convert-body");
+        var cjd = toJD(year, mo, day);
+        foo.innerHTML = `
+        <p> Online Julian  Day  Number  to  Gregorian Converter</p>
+        <br>
+        <label for="jd"><small>JD : </small></label>
+        <input type="number" name="jd" id="jd" class="input-3" value=${cjd} min=0>
+        <br><br>
+        `;
+        fra.appendChild(foo);
+        var toge = () => {
+          var jdd = foo.elements.namedItem("jd").value;
+          var ge = toGregorian(jdd);
+          var rge = `
+          <small style="margin-right: 10px">Year : ${ge.year}</small>
+          <small style="margin-right: 10px">Month : ${
+            monthArray[ge.month]
+          }</small>
+          <small style="margin-right: 10px">Day : ${ge.day}</small>
+          <small style="margin-right: 10px">Hour : ${ge.hour}</small>
+          <small style="margin-right: 10px">Minute : ${ge.minute}</small>
+          <small style="margin-right: 10px">Second : ${ge.second}</small>
+          `;
+          return rge;
+        };
+        var rdiv = document.createElement("div");
+        rdiv.innerHTML = toge();
+        foo.appendChild(rdiv);
+        foo.addEventListener("change", (e) => {
+          e.preventDefault();
+          rdiv.innerHTML = toge();
+        });
+        console.log(toge());
+      </script>
+     
+      <footer>
+        <small id="ftext"></small>
+      </footer>
+      <script>
+        var ftext = `@   ${year}  -  Hin Thar`;
+        document.getElementById("ftext").innerHTML = ftext;
+      </script>
+    </main>
+  </body>
+</html>

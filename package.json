@@ -20,7 +20,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hinthar/julian-days.git"
+    "url": "git+gh repo clone hinthar/julian-days-converter"
   },
   "devDependencies": {
     "uglify-js": "^3.17.4"

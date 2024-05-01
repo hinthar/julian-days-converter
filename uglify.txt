@@ -128,4 +128,6 @@ pnpm uglifyjs src/index.js  -o ./dist/esm/index.min.js -c -m
 pnpm uglifyjs  ./src/esm/index.js --source-map --output ./dist/esm/index.min.js 
    pnpm uglifyjs ./src/cjs/index.js --source-map --output ./dist/cjs/index.min.js
               uglifyjs ./src/browser/index.js --source-map --output ./dist/browser/index.min.js
+
+pnpm publish --access public
                 
